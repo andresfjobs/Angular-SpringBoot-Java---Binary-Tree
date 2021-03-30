@@ -7,9 +7,10 @@ import com.btree.model.Persona;
 public interface PersonaService {
 
 	List<Persona>listar();
-	Persona listarId(int id);
+	Persona listarId(int nmid);
 	Persona add(Persona p);
 	Persona edit(Persona p);
 	Persona delete(Persona p);
+	
 	
 }

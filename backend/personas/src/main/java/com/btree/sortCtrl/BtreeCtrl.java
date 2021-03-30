@@ -3,12 +3,18 @@ package com.btree.sortCtrl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.btree.model.Persona;
+import com.btree.personas.PersonaService;
 import com.btree.sortModel.Node;
 
 public class BtreeCtrl {
 
+	@Autowired
+	PersonaService service;
 	Node root;
+	
 	private List<Node> tree = new ArrayList<>();
 
 	// Metodo donde se carga el arbol de la base de datos, organiza la data en caso
@@ -21,17 +27,28 @@ public class BtreeCtrl {
 
 			Persona leaf = data.get(indice);
 
-			addNode(leaf.getId(), leaf.getName());
+			addNode(leaf);
 		}
 
 		printTree();
 
 	}
+	
+	public void dataLeaf(Persona data) {
+		System.out.println("Entro al arbol de datos");
+
+			addNode(data);
+			printTree();
+			//return service.add(data);
+	}
+	
+	
 
 	// Imprimir arbol ordenado.
 	public void printTree() {
 
 		List<Node> data = this.tree;
+		System.out.println("imprimiendo arbol");
 		for (int i = 0; i < data.size(); i++) {
 			System.out.println(data.get(i));
 
@@ -50,9 +67,9 @@ public class BtreeCtrl {
 		tree.add(node); 
 	}
 
-	public void addNode(int key, String name) {
+	public void addNode(Persona p) {
 
-		Node newNode = new Node(key, name);
+		Node newNode = new Node(p.getNmid(), p.getCus_dsnombres());
 
 		if (root == null) {
 
@@ -69,7 +86,7 @@ public class BtreeCtrl {
 
 				parent = focusNode;
 
-				if (key < focusNode.key) {
+				if (p.getNmid() < focusNode.key) {
 
 					focusNode = focusNode.leftChild;
 
@@ -94,5 +111,11 @@ public class BtreeCtrl {
 				}
 			}
 		}
+	}
+	
+	public void saveTree() {
+		
+	
+		
 	}
 }

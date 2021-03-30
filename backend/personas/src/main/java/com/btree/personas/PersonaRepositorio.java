@@ -8,8 +8,8 @@ import com.btree.model.Persona;
 public interface PersonaRepositorio extends Repository<Persona, Integer>{
 	
 	List<Persona>findAll();
-	Persona findById(int id);
+	Persona findById(int nmid);
 	Persona save(Persona p);
-	void delete(Persona p);
+	Persona delete(Persona p);
 
 }

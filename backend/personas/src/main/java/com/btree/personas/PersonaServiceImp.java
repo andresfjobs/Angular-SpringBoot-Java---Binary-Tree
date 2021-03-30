@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.btree.model.Persona;
+import com.btree.sortCtrl.BtreeCtrl;
 
 @Service
 public class PersonaServiceImp implements PersonaService{
 
+	BtreeCtrl ArbolEntrada = new BtreeCtrl();
+	
 	@Autowired
 	private PersonaRepositorio repositorio;
 	
@@ -20,27 +23,30 @@ public class PersonaServiceImp implements PersonaService{
 	}
 
 	@Override
-	public Persona listarId(int id) {
+	public Persona listarId(int nmid) {
+		
 		// TODO Auto-generated method stub
-		return null;
+		return repositorio.findById(nmid);
 	}
 
 	@Override
 	public Persona add(Persona p) {
 		// TODO Auto-generated method stub
-		return null;
+		ArbolEntrada.dataLeaf(p);
+		return repositorio.save(p);
 	}
 
 	@Override
 	public Persona edit(Persona p) {
 		// TODO Auto-generated method stub
-		return null;
+		return repositorio.save(p);
 	}
 
 	@Override
 	public Persona delete(Persona p) {
 		// TODO Auto-generated method stub
-		return null;
+		return repositorio.delete(p);
 	}
+
 
 }
